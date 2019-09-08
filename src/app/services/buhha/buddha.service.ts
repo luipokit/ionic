@@ -8,13 +8,24 @@ import { map } from 'rxjs/operators';
 })
 export class BuddhaService {
 
-  url = 'https://jsonplaceholder.typicode.com/todos/1';
-  deployURL = 'https://mongo_proj-8xweov.turbo360-vertex.com/api/profile';
-  turboServerURL = 'http://localhost:3000/api/profile';
+  testUrl = 'https://jsonplaceholder.typicode.com/todos/1';
+  buddhaURL = 'https://deerpark.app/api/v1/allworks';
+
+  DEV_SERVER_URL = 'http://localhost:3000/api/';
+  PROD_SERVER_URL = 'https://mongo_proj-8xweov.turbo360-vertex.com/api/buddha?pageNo=1&size=10';
+
+  // http://localhost:3000/api/buddha?pageNo=1&size=10
 
   constructor(private http: HttpClient) { }
 
   showData() {
-    return this.http.get(this.deployURL);
+    // return this.http.get(this.PROD_SERVER_URL + this.Profile);
+  }
+
+  showRealData() {
+    // return this.http.get(this.PROD_SERVER_URL)
+    return this.http.get(this.PROD_SERVER_URL).pipe(
+      map(results => results['data'])
+    )
   }
 }
