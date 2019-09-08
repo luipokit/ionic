@@ -23,8 +23,12 @@ const routes: Routes = [
     loadChildren: './pages/animals/animals.module#AnimalsPageModule',
     canActivate: [AuthGuard]
   },
-  { path: 'movies', loadChildren: './pages/movies/movies.module#MoviesPageModule' },
-  { path: 'movies/:id', loadChildren: './pages/movie-details/movie-details.module#MovieDetailsPageModule' }
+  { path: 'movies', 
+    loadChildren: './pages/movies/movies.module#MoviesPageModule' 
+  },
+  { path: 'movies/:id', 
+    loadChildren: './pages/movie-details/movie-details.module#MovieDetailsPageModule' 
+  }
 ];
 
 @NgModule({
