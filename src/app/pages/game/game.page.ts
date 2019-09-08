@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-game',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GamePage implements OnInit {
 
-  constructor() { }
+  constructor(
+    public menu: MenuController,
+  ) {
+    
+  }
 
   ngOnInit() {
   }

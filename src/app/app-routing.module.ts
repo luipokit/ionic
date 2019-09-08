@@ -10,19 +10,21 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: './home/home.module#HomePageModule'
+    loadChildren: './pages/home/home.module#HomePageModule'
   },
   {
     path: 'list',
-    loadChildren: './list/list.module#ListPageModule'
+    loadChildren: './pages/list/list.module#ListPageModule'
   },
   { path: 'game', 
-    loadChildren: './game/game.module#GamePageModule' 
+    loadChildren: './pages/game/game.module#GamePageModule' 
   },
   { path: 'animals', 
-    loadChildren: './animals/animals.module#AnimalsPageModule',
+    loadChildren: './pages/animals/animals.module#AnimalsPageModule',
     canActivate: [AuthGuard]
-  }
+  },
+  { path: 'movies', loadChildren: './pages/movies/movies.module#MoviesPageModule' },
+  { path: 'movie-details', loadChildren: './pages/movie-details/movie-details.module#MovieDetailsPageModule' }
 ];
 
 @NgModule({
