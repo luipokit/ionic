@@ -29,6 +29,11 @@ export class AppComponent {
       title: 'Animals',
       url: '/animals',
       icon: 'paw'
+    },
+    {
+      title: 'Movies',
+      url: '/movies',
+      icon: 'paw'
     }
   ];
 

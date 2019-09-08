@@ -24,7 +24,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'movies', loadChildren: './pages/movies/movies.module#MoviesPageModule' },
-  { path: 'movie-details', loadChildren: './pages/movie-details/movie-details.module#MovieDetailsPageModule' }
+  { path: 'movies/:id', loadChildren: './pages/movie-details/movie-details.module#MovieDetailsPageModule' }
 ];
 
 @NgModule({
