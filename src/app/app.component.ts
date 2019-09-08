@@ -34,6 +34,11 @@ export class AppComponent {
       title: 'Movies',
       url: '/movies',
       icon: 'paw'
+    },
+    {
+      title: 'Buddha',
+      url: '/buddha',
+      icon: 'paw'
     }
   ];
 

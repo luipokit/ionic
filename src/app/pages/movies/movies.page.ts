@@ -1,4 +1,4 @@
-import { MovieService, SearchType } from './../../services/movie.service';
+import { MovieService, SearchType } from '../../services/movie/movie.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
  

@@ -19,15 +19,21 @@ const routes: Routes = [
   { path: 'game', 
     loadChildren: './pages/game/game.module#GamePageModule' 
   },
-  { path: 'animals', 
+  { 
+    path: 'animals', 
     loadChildren: './pages/animals/animals.module#AnimalsPageModule',
     canActivate: [AuthGuard]
   },
-  { path: 'movies', 
+  { 
+    path: 'movies', 
     loadChildren: './pages/movies/movies.module#MoviesPageModule' 
   },
-  { path: 'movies/:id', 
+  { 
+    path: 'movies/:id', 
     loadChildren: './pages/movie-details/movie-details.module#MovieDetailsPageModule' 
+  },
+  { path: 'buddha', 
+    loadChildren: './pages/buddha/buddha.module#BuddhaPageModule'
   }
 ];
 
