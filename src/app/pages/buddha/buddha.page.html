@@ -15,7 +15,7 @@
   </ion-button> -->
   <ion-content>
  
-      <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar> -->
+      <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar>
      
       <!-- <ion-item>
         <ion-label>Select Searchtype</ion-label>
@@ -39,9 +39,9 @@
             {{ item.title }}
           </ion-label>
      
-          <ion-icon slot="end" *ngIf="item.Type == 'movie'" name="videocam"></ion-icon>
+          <!-- <ion-icon slot="end" *ngIf="item.Type == 'movie'" name="videocam"></ion-icon>
           <ion-icon slot="end" *ngIf="item.Type == 'series'" name="tv"></ion-icon>
-          <ion-icon slot="end" *ngIf="item.Type == 'game'" name="logo-game-controller-b"></ion-icon>
+          <ion-icon slot="end" *ngIf="item.Type == 'game'" name="logo-game-controller-b"></ion-icon> -->
      
         </ion-item>
      

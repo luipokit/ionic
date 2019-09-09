@@ -16,6 +16,7 @@ import { Platform } from '@ionic/angular';
 export class BuddhaPage implements OnInit {
 
   results: Observable<any>;
+  searchTerm: string = '';
   public data: any;
 
   constructor(
@@ -24,18 +25,13 @@ export class BuddhaPage implements OnInit {
     private http: HttpClient
   ) { }
 
-  ngOnInit() {
-    this.results = this.buddhaService.showRealData()
+  ngOnInit() { }
+
+  searchChanged() {
+    console.log(`searchTerm: ${this.searchTerm}`)
+    this.results = this.buddhaService.searchData(this.searchTerm)
     this.results.subscribe(data => {
       console.log(data)
     })
   }
-
-  showData() {
-    this.buddhaService.showRealData()
-      .subscribe((data) => {
-        console.log(data)
-      })
-  }
-
 }
