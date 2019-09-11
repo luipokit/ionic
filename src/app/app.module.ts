@@ -12,7 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { IonicStorageModule } from '@ionic/storage';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { HTTP } from '@ionic-native/http/ngx';
 
 
@@ -28,6 +28,7 @@ import { HTTP } from '@ionic-native/http/ngx';
       driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
     HttpClientModule,
+    HttpClientJsonpModule
   ],
   providers: [
     StatusBar,
