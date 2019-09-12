@@ -10,7 +10,8 @@ export class UtilsService {
   // buddhaURL = 'https://deerpark.app/api/v1/allworks';
 
   DEV_SERVER_URL = 'http://localhost:3000/api/';
-  PROD_SERVER_URL = 'https://mongo_proj-8xweov.turbo360-vertex.com/api/buddha?size=10';
+  // PROD_SERVER_URL = 'https://mongo_proj-8xweov.turbo360-vertex.com/api/buddha?size=10';
+  PROD_SERVER_URL = 'https://mongo_proj-8xweov.turbo360-vertex.com/api/buddha';
 
   constructor(public http: HttpClient) { }
 
@@ -49,7 +50,7 @@ export class UtilsService {
 
     this.http.get(url, options)
       .subscribe((result:any) => {
-        success(result.data)
+        success(result)
       }, (result:any) => {
        error(JSON.parse(result.error));
     }).add(done);

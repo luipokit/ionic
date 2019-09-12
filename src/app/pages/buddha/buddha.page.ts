@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { HTTP } from '@ionic-native/http/ngx';
 
 import { Platform, IonInfiniteScroll } from '@ionic/angular';
+import { UtilsService } from '../../services/utils/utils.service'
 
 @Component({
   selector: 'app-buddha',
@@ -20,43 +21,56 @@ export class BuddhaPage implements OnInit {
   results: Observable<any>;
   searchTerm: string = '';
   data: any;
-  pageNo: number = 1;
+  pageNo: number = 0;
+  size: number = 10;
 
   constructor(
     public platform: Platform,
     private buddhaService: BuddhaService, 
+    private utils: UtilsService,
     private http: HttpClient
   ) { 
   }
 
-  ngOnInit() { 
-    this.buddhaService
-      .getData(
-        this.buddhaService.PROD_SERVER_URL+ `&pageNo=${this.pageNo}`
-      )
-      .subscribe(data => {
-        this.data = data
-        console.log(data)
+  loadBuddha() { 
+
+    this.pageNo += 1;
+
+    this.utils.HttpGet(
+      this.utils.PROD_SERVER_URL, 
+      {
+        pageNo: this.pageNo,
+        size: this.size
+      }, 
+      {}, 
+      response => {
+        if (this.data == undefined) {
+          this.data = response;
+        } else {
+          for (const newData of response.data) {
+            this.data.data.push(newData);
+          }
+        }
+        console.log(this.data)
+      }, 
+      error => {
+        console.log(error);
+      },
+      () => {
         console.log(`Get Page ${this.pageNo} !`)
-      })
+      }
+    )
+    
+  }
+
+  ngOnInit() { 
+    this.loadBuddha();
   }
 
   loadMoreData(event) {
     setTimeout(() => {
-      this.pageNo++;
-      this.buddhaService.getData(
-        this.buddhaService.PROD_SERVER_URL+ `&pageNo=${
-          this.pageNo
-        }`
-      )
-      .subscribe(newDatas => {
-        console.log(newDatas)
-        for (const newData of newDatas['data']) {
-          this.data.data.push(newData);
-        }
-        console.log(`Get Page ${this.pageNo} !`)
-        event.target.complete();
-      })
+      this.loadBuddha();
+      event.target.complete();
     }, 1000)
   }
 

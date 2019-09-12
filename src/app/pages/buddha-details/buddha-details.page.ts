@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 export class BuddhaDetailsPage implements OnInit {
 
   html: any;
+  id: any;
 
   constructor(
     private activatedRoute: ActivatedRoute, 
@@ -17,10 +18,10 @@ export class BuddhaDetailsPage implements OnInit {
 
   ngOnInit() {
     // Get the ID that was passed with the URL
-    let id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
  
     // Get the information from the API
-    this.buddhaService.getHtml(id).subscribe(result => {
+    this.buddhaService.getHtml(this.id).subscribe(result => {
       // console.log(result)
       this.html = result;
     });
