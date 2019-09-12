@@ -1,5 +1,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 import { MovieDetailsPage } from './movie-details.page';
 
@@ -11,6 +14,7 @@ describe('MovieDetailsPage', () => {
     TestBed.configureTestingModule({
       declarations: [ MovieDetailsPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [HttpClientTestingModule, RouterModule.forRoot([]),], 
     })
     .compileComponents();
   }));

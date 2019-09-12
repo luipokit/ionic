@@ -9,6 +9,7 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+// import { AuthGuard } from './auth-gaurd.service';
 
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -28,7 +29,7 @@ import { HTTP } from '@ionic-native/http/ngx';
       driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
     HttpClientModule,
-    HttpClientJsonpModule
+    HttpClientJsonpModule,
   ],
   providers: [
     StatusBar,

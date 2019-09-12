@@ -25,11 +25,11 @@ export class AppComponent {
       url: '/game',
       icon: 'logo-game-controller-b'
     },
-    {
-      title: 'Animals',
-      url: '/animals',
-      icon: 'paw'
-    },
+    // {
+    //   title: 'Animals',
+    //   url: '/animals',
+    //   icon: 'paw'
+    // },
     {
       title: 'Movies',
       url: '/movies',

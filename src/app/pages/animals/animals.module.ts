@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { AnimalsPage } from './animals.page';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfilePage } from './profile/profile.page';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 
 const routes: Routes = [
@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: ':id', 
-    component: ProfileComponent
+    component: ProfilePage
   }
 ];
 
@@ -29,7 +29,7 @@ const routes: Routes = [
   ],
   declarations: [
     AnimalsPage,
-    ProfileComponent
+    ProfilePage
   ]
 })
 

@@ -16,3 +16,7 @@ ionic serve --devapp
 # CROS 
 close all the chrome first
 open -a Google\ Chrome --args --disable-web-security --user-data-dir
+
+# Testing 
+https://ionicframework.com/docs/building/testing
+https://angular.io/guide/testing#component-test-basics
