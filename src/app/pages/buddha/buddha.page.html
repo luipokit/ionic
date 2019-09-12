@@ -32,7 +32,7 @@
      
         <!-- </ion-item> -->
 
-        <ion-item *ngFor="let item of data?.data">
+        <ion-item button *ngFor="let item of data?.data" [routerLink]="['/', 'buddha', item.id]">
           <ion-label text-wrap>
             <h3>{{ item.id }}</h3>
             {{ item.title }}

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, from, of} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Platform } from '@ionic/angular';
-import { HTTP } from '@ionic-native/http/ngx';
+// import { HTTP } from '@ionic-native/http/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class BuddhaService {
 
   constructor(
     private http: HttpClient,
-    private nativeHttp: HTTP,
+    // private nativeHttp: HTTP,
     public platform: Platform
   ) { }
 
@@ -42,7 +42,13 @@ export class BuddhaService {
     )
   }
 
-  getData(url){
+  getData (url) {
     return this.http.get(url)
+  }
+
+  getHtml (id) {
+    return this.http.get(
+      `https://deerpark.app/api/v1/html/${id}`,
+      {responseType: 'text'})
   }
 }

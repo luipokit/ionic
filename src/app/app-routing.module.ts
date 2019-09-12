@@ -32,8 +32,13 @@ const routes: Routes = [
     path: 'movies/:id', 
     loadChildren: './pages/movie-details/movie-details.module#MovieDetailsPageModule' 
   },
-  { path: 'buddha', 
+  { 
+    path: 'buddha', 
     loadChildren: './pages/buddha/buddha.module#BuddhaPageModule'
+  },
+  { 
+    path: 'buddha/:id', 
+    loadChildren: './pages/buddha-details/buddha-details.module#BuddhaDetailsPageModule' 
   }
 ];
 
