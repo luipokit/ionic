@@ -1,7 +1,6 @@
 {
     "confirmation": "success",
-    "data": [
-        {
+    "data": [{
             "id": "A1057",
             "title": "新譯大方廣佛華嚴經音義",
             "byline": 0,
@@ -193,4 +192,4 @@
         }
     ],
     "pages": 462
-  }
+}

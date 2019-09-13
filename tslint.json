@@ -28,8 +28,11 @@
     "interface-over-type-literal": true,
     "label-position": true,
     "max-line-length": [
-      true,
-      140
+      false, 
+      {
+        "limit": 120, 
+        "ignore-pattern": "^import [^,]+ from |^export | implements"
+      }
     ],
     "member-access": false,
     "member-ordering": [

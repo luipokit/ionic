@@ -1,13 +1,29 @@
-import { BuddhaService } from '../../services/buhha/buddha.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  BuddhaService
+} from '../../services/buhha/buddha.service';
 
-import { Observable, of, forkJoin, merge } from 'rxjs';
+import {
+  Component,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
-import { HTTP } from '@ionic-native/http/ngx';
+import {
+  Observable,
+} from 'rxjs';
 
-import { Platform, IonInfiniteScroll } from '@ionic/angular';
-import { UtilsService } from '../../services/utils/utils.service'
+import {
+  HttpClient
+} from '@angular/common/http';
+
+import {
+  Platform,
+  IonInfiniteScroll
+} from '@ionic/angular';
+
+import {
+  UtilsService
+} from '../../services/utils/utils.service';
 
 @Component({
   selector: 'app-buddha',
@@ -15,58 +31,55 @@ import { UtilsService } from '../../services/utils/utils.service'
   styleUrls: ['./buddha.page.scss'],
 })
 export class BuddhaPage implements OnInit {
-  
+
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
-  results: Observable<any>;
-  searchTerm: string = '';
+  results: Observable < any > ;
+  searchTerm = '';
   data = [];
-  pageNo: number = 0;
-  size: number = 10;
+  pageNo = 0;
+  size = 10;
 
   constructor(
     public platform: Platform,
-    private buddhaService: BuddhaService, 
+    private buddhaService: BuddhaService,
     private utils: UtilsService,
     private http: HttpClient
-  ) { 
-  }
+  ) {}
 
-  loadBuddha() { 
+  loadBuddha() {
 
     this.pageNo += 1;
 
     this.utils.HttpGet(
-      this.utils.PROD_SERVER_URL, 
-      {
+      this.utils.PROD_SERVER_URL, {
         pageNo: this.pageNo,
         size: this.size
-      }, 
-      {}, 
+      }, {},
       response => {
-        for (const newData of response.data){
-          this.data.push(newData)
+        for (const newData of response.data) {
+          this.data.push(newData);
         }
-        console.log(this.data)
-      }, 
+        console.log(this.data);
+      },
       error => {
         console.log(error);
       },
       () => {
-        console.log(`Get Page ${this.pageNo} !`)
+        console.log(`Get Page ${this.pageNo} !`);
       }
-    )
+    );
   }
 
-  ngOnInit() { 
-    this.loadBuddha()
+  ngOnInit() {
+    this.loadBuddha();
   }
 
   loadMoreData(event) {
     setTimeout(() => {
       this.loadBuddha();
       event.target.complete();
-    }, 1000)
+    }, 1000);
   }
 
   toggleInfiniteScroll() {
@@ -74,9 +87,9 @@ export class BuddhaPage implements OnInit {
   }
 
   searchChanged() {
-    this.results = this.buddhaService.searchData(this.searchTerm, this.pageNo)
+    this.results = this.buddhaService.searchData(this.searchTerm, this.pageNo);
     this.results.subscribe(data => {
-      console.log(data)
-    })
+      console.log(data);
+    });
   }
 }
