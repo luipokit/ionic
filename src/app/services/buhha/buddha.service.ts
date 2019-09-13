@@ -21,7 +21,7 @@ export class BuddhaService {
   constructor(
     private http: HttpClient,
     // private nativeHttp: HTTP,
-    public platform: Platform
+    public platform: Platform,
   ) { }
 
   searchData(title: string, pageNo: number) {
@@ -43,7 +43,7 @@ export class BuddhaService {
   }
 
   getData (url) {
-    return this.http.get(url)
+    return this.http.get(url).pipe(map(results => results['data']))
   }
 
   getHtml (id) {

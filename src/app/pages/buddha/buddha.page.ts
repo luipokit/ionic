@@ -20,7 +20,7 @@ export class BuddhaPage implements OnInit {
 
   results: Observable<any>;
   searchTerm: string = '';
-  data: any;
+  data = [];
   pageNo: number = 0;
   size: number = 10;
 
@@ -44,12 +44,8 @@ export class BuddhaPage implements OnInit {
       }, 
       {}, 
       response => {
-        if (this.data == undefined) {
-          this.data = response;
-        } else {
-          for (const newData of response.data) {
-            this.data.data.push(newData);
-          }
+        for (const newData of response.data){
+          this.data.push(newData)
         }
         console.log(this.data)
       }, 
@@ -60,11 +56,10 @@ export class BuddhaPage implements OnInit {
         console.log(`Get Page ${this.pageNo} !`)
       }
     )
-    
   }
 
   ngOnInit() { 
-    this.loadBuddha();
+    this.loadBuddha()
   }
 
   loadMoreData(event) {
