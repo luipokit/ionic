@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
+export interface Work {
+  confirmation: string,
+  data: object,
+  pages: number
+}
+
 @Injectable({
   providedIn: 'root'
 })

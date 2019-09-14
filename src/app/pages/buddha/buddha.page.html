@@ -1,15 +1,15 @@
 <ion-header>
   <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
 
-      <ion-title>
-        buddha
-      </ion-title>
-      <ion-button color="light" (click)="toggleInfiniteScroll()" slot='end'> 
-        Toggle Infinite Scroll
-      </ion-button>
+    <ion-title>
+      buddha
+    </ion-title>
+    <ion-button color="light" (click)="toggleInfiniteScroll()" slot='end'>
+      Toggle Infinite Scroll
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -18,39 +18,37 @@
     Show Data
   </ion-button> -->
   <ion-content>
- 
-      <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar> -->
-     
-      <!-- <ion-button (click)="toggleInfiniteScroll()" expand="block">
+
+    <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar> -->
+
+    <!-- <ion-button (click)="toggleInfiniteScroll()" expand="block">
         Toggle Infinite Scroll
       </ion-button> -->
-     
-      <ion-list>
-     
-        <!-- <ion-item button *ngFor="let item of (results | async)" [routerLink]="['/', 'movies', item.imdbID]"> -->
-     
-          <!-- <ion-label text-wrap>
+
+    <ion-list>
+
+      <!-- <ion-item button *ngFor="let item of (results | async)" [routerLink]="['/', 'movies', item.imdbID]"> -->
+
+      <!-- <ion-label text-wrap>
             <h3>{{ item.id }}</h3>
             {{ item.title }}
           </ion-label> -->
-     
-        <!-- </ion-item> -->
 
-        <ion-item button *ngFor="let item of data" [routerLink]="['/', 'buddha', item.id]">
-          <ion-label text-wrap>
-            <h3>{{ item.id }}</h3>
-            {{ item.title }}
-          </ion-label>
-        </ion-item>
-     
-      </ion-list>
+      <!-- </ion-item> -->
 
-      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreData($event)">
-        <ion-infinite-scroll-content
-          loadingSpinner="bubbles"
-          loadingText="Loading more data...">
-        </ion-infinite-scroll-content>
-      </ion-infinite-scroll>
-     
-    </ion-content>
+      <ion-item button *ngFor="let item of data" [routerLink]="['/', 'buddha', item.id]">
+        <ion-label text-wrap>
+          <h3>{{ item.id }}</h3>
+          {{ item.title }}
+        </ion-label>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreData($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+  </ion-content>
 </ion-content>

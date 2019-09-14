@@ -1,30 +1,41 @@
-# Install
+# Ionic App
+
+## Install
+
 npm install
 
-# Dev Server
+## Dev Server
+
 ionic serve
 
-# Build on Android
+## Build on Android
+
 ionic cordova build android
 
-# Build on iOS
+## Build on iOS
+
 ionic cordova build ios
 
-# Build on devapp
+## Build on devapp
+
 ionic serve --devapp
 
-# CROS 
+## CROS
+
 close all the chrome first
 open -a Google\ Chrome --args --disable-web-security --user-data-dir
 
-# Unit Testing 
+## Unit Testing
+
 ng test
 
-https://ionicframework.com/docs/building/testing
-https://angular.io/guide/testing#component-test-basics
-https://medium.com/@manivel45/angular-7-unit-testing-code-coverage-5c7a238315b6
+`https://ionicframework.com/docs/building/testing`
+`https://angular.io/guide/testing#component-test-basics`
+`https://medium.com/@manivel45/angular-7-unit-testing-code-coverage-5c7a238315b6`
+`https://stackoverflow.com/questions/46028804/how-to-mock-angular-4-3-httpclient-an-error-response-in-testing`
 
-# Debug
+## Debug
+
 Debug specs in the browser in the same way that you debug an application.
 
 1. Reveal the karma browser window (hidden earlier).

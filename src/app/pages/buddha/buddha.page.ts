@@ -73,6 +73,7 @@ export class BuddhaPage implements OnInit {
 
   ngOnInit() {
     this.loadBuddha();
+    this.getData();
   }
 
   loadMoreData(event) {
@@ -91,5 +92,12 @@ export class BuddhaPage implements OnInit {
     this.results.subscribe(data => {
       console.log(data);
     });
+  }
+
+  getData() {
+    let temp = this.buddhaService.getData(this.utils.PROD_SERVER_URL);
+    // temp.subscribe(data => {
+    //   console.log(data);
+    // });
   }
 }

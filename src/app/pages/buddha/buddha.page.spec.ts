@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-// import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { BuddhaService } from '../../services/buhha/buddha.service';
 import { UtilsService } from '../../services/utils/utils.service';
@@ -23,12 +22,6 @@ describe('BuddhaPage', () => {
     })
     .compileComponents();
   }));
-
-  // beforeEach(() => {
-  //   const fixture = TestBed.createComponent(BuddhaPage);
-  //   const component: BuddhaPage = fixture.componentInstance;
-  //   fixture.detectChanges();
-  // });
 
   function setup() {
     const fixture = TestBed.createComponent(BuddhaPage);
@@ -67,21 +60,24 @@ describe('BuddhaPage', () => {
   it('should call nodejs server data', () => {
     const { buddhaService, httpTestingController } = setup();
     buddhaService.getData(PROD_SERVER_URL).subscribe(data => {
+      expect(data['confirmation']).toEqual('success');
+      expect(data['pages']).toEqual(462);
       expect(data).toEqual(expectJson);
     })
 
+    // Use the expectOne matcher to confirm that the request made once
     const req = httpTestingController.expectOne(PROD_SERVER_URL);
     expect(req.request.method).toBe('GET');
+    expect(req.request.responseType).toEqual('json');
+
+    // All flush on the mock request and pass-in our mock data. 
+    // The flush method completes the request using the data passed to it.
     req.flush({
       data: expectJson
     });
 
+    /* Call the verify method on our HttpTestingController instance 
+    to ensure that there are no outstanding requests to be made. */
     httpTestingController.verify();
   });
-
-  // afterEach(() => {
-  //   const { httpTestingController } = setup();
-  //   httpTestingController.verify();
-  // });
-  
 });
