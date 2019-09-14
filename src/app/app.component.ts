@@ -15,16 +15,16 @@ export class AppComponent {
       url: '/home',
       icon: 'home'
     },
-    {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
-    },
-    {
-      title: 'Game',
-      url: '/game',
-      icon: 'logo-game-controller-b'
-    },
+    // {
+    //   title: 'List',
+    //   url: '/list',
+    //   icon: 'list'
+    // },
+    // {
+    //   title: 'Game',
+    //   url: '/game',
+    //   icon: 'logo-game-controller-b'
+    // },
     // {
     //   title: 'Animals',
     //   url: '/animals',
@@ -33,12 +33,17 @@ export class AppComponent {
     {
       title: 'Movies',
       url: '/movies',
-      icon: 'paw'
+      icon: 'videocam'
     },
     {
       title: 'Buddha',
       url: '/buddha',
-      icon: 'paw'
+      icon: 'book'
+    },
+    {
+      title: 'Chat',
+      url: '/chat',
+      icon: 'chatboxes'
     }
   ];
 

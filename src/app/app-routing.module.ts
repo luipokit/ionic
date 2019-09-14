@@ -39,6 +39,10 @@ const routes: Routes = [
   { 
     path: 'buddha/:id', 
     loadChildren: './pages/buddha-details/buddha-details.module#BuddhaDetailsPageModule' 
+  },
+  { 
+    path: 'chat', 
+    loadChildren: './pages/chat/chat.module#ChatPageModule' 
   }
 ];
 
