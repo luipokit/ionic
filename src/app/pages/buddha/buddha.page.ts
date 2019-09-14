@@ -60,7 +60,7 @@ export class BuddhaPage implements OnInit {
         for (const newData of response.data) {
           this.data.push(newData);
         }
-        console.log(this.data);
+        // console.log(this.data);
       },
       error => {
         console.log(error);
