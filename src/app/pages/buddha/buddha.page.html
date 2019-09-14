@@ -3,12 +3,11 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-
     <ion-title>
       buddha
     </ion-title>
-    <ion-button color="light" (click)="toggleInfiniteScroll()" slot='end'>
-      Toggle Infinite Scroll
+    <ion-button size="small" color="light" (click)="toggleInfiniteScroll()" slot='end'>
+      No Scroll
     </ion-button>
   </ion-toolbar>
 </ion-header>
@@ -29,7 +28,7 @@
 
       <!-- <ion-item button *ngFor="let item of (results | async)" [routerLink]="['/', 'movies', item.imdbID]"> -->
 
-      <!-- <ion-label text-wrap>
+      <!-- <ion-label class="ion-text-wrap">
             <h3>{{ item.id }}</h3>
             {{ item.title }}
           </ion-label> -->
@@ -37,7 +36,7 @@
       <!-- </ion-item> -->
 
       <ion-item button *ngFor="let item of data" [routerLink]="['/', 'buddha', item.id]">
-        <ion-label text-wrap>
+        <ion-label class="ion-text-wrap">
           <h3>{{ item.id }}</h3>
           {{ item.title }}
         </ion-label>

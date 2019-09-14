@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ChatPage } from './chat.page';
+import { ChatService } from "../../services/chat/chat.service";
+
 
 const routes: Routes = [
   {
@@ -21,6 +23,11 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ChatPage]
+  declarations: [
+    ChatPage
+  ],
+  providers: [
+    ChatService
+  ]
 })
 export class ChatPageModule {}
