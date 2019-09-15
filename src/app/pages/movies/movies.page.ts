@@ -29,11 +29,8 @@ export class MoviesPage implements OnInit {
 
   ngOnInit() {}
 
-  searchChanged() {
+  searchChanged(e) {
     // Call our service function which returns an Observable
     this.results = this.movieService.searchData(this.searchTerm, this.type);
-    this.results.subscribe(data => {
-      console.log(data);
-    });
   }
 }

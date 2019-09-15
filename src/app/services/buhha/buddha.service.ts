@@ -10,7 +10,9 @@ import {
 import {
   Platform
 } from '@ionic/angular';
-// import { HTTP } from '@ionic-native/http/ngx';
+import {
+  HTTP
+} from '@ionic-native/http/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +29,7 @@ export class BuddhaService {
 
   constructor(
     private http: HttpClient,
-    // private nativeHttp: HTTP,
+    private nativeHttp: HTTP,
     public platform: Platform,
   ) {}
 
@@ -58,5 +60,17 @@ export class BuddhaService {
       `https://deerpark.app/api/v1/html/${id}`, {
         responseType: 'text'
       });
+  }
+
+  getHtmlNative(id): any {
+    return this.nativeHttp.get(`https://deerpark.app/api/v1/html/${id}`, {}, {})
+    .then(response => {
+      // console.log(`getHtmlNative response: ${response}`) // response
+      // console.log(`getHtmlNative response.data: ${response.data}`) // html
+      return response.data;
+    }).catch(error => {
+      console.log(`getHtmlNative error: ${error}`)
+      console.log(`getHtmlNative error.data: ${error.error}`)
+    })
   }
 }

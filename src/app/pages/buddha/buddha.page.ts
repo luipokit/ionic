@@ -53,14 +53,25 @@ export class BuddhaPage implements OnInit {
 
     this.utils.HttpGet(
       this.utils.PROD_SERVER_URL, {
-        pageNo: this.pageNo,
-        size: this.size
-      }, {},
+        'pageNo': this.pageNo.toString(),
+        'size': this.size.toString()
+      }, {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
       response => {
-        for (const newData of response.data) {
-          this.data.push(newData);
+        if (this.platform.is('cordova')) {
+          let obj = JSON.parse(response);
+          for (const newData of obj.data) {
+            // console.log(newData);
+            this.data.push(newData);
+          }
+        } else {
+          for (const newData of response.data) {
+            console.log(newData)
+            this.data.push(newData);
+          }
         }
-        // console.log(this.data);
       },
       error => {
         console.log(error);

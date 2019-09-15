@@ -25,7 +25,9 @@ export class ChatMessage {
   status: string;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ChatService {
 
   constructor(
