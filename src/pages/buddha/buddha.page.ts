@@ -25,6 +25,7 @@ import {
   UtilsService
 } from '../../services/utils/utils.service';
 
+
 @Component({
   selector: 'app-buddha',
   templateUrl: './buddha.page.html',

@@ -8,7 +8,17 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
-  constructor(private router: Router) {}
+  toUser: Object;
+
+  // constructor(public navCtrl: NavController) {
+
+  constructor(private router: Router) {
+    this.toUser = {
+      toUserId:'210000198410281948',
+      toUserName:'Hancock'
+    }
+  }
+
   
   go() {
     this.router.navigateByUrl('/animals');

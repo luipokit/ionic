@@ -35,7 +35,7 @@
 
       <!-- </ion-item> -->
 
-      <ion-item button *ngFor="let item of data" [routerLink]="['/', 'buddha', item.id]">
+      <ion-item button no-lines [color]="even? '' : 'light'" *ngFor="let item of data; let even = even" [routerLink]="['/', 'buddha', item.id]">
         <ion-label class="ion-text-wrap">
           <h3>{{ item.id }}</h3>
           {{ item.title }}
