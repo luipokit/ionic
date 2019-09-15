@@ -84,7 +84,7 @@ export class BuddhaPage implements OnInit {
 
   ngOnInit() {
     this.loadBuddha();
-    this.getData();
+    // this.getData();
   }
 
   loadMoreData(event) {

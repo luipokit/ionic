@@ -38,8 +38,11 @@ export class BuddhaDetailsPage implements OnInit {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
 
     if (this.platform.is('cordova')) {
-      this.buddhaService.getHtmlNative(this.id).then(html => {
+      this.buddhaService.getHtmlNative(this.id)
+      .then(html => {
         this.html = html;
+      }).catch(error => {
+        console.log(error)
       });
     } else {
       // Get the information from the API

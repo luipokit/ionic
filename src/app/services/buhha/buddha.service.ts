@@ -64,13 +64,14 @@ export class BuddhaService {
 
   getHtmlNative(id): any {
     return this.nativeHttp.get(`https://deerpark.app/api/v1/html/${id}`, {}, {})
-    .then(response => {
-      // console.log(`getHtmlNative response: ${response}`) // response
-      // console.log(`getHtmlNative response.data: ${response.data}`) // html
-      return response.data;
-    }).catch(error => {
-      console.log(`getHtmlNative error: ${error}`)
-      console.log(`getHtmlNative error.data: ${error.error}`)
-    })
+      .then(response => {
+        // console.log(`getHtmlNative response: ${response}`) // response
+        // console.log(`getHtmlNative response.data: ${response.data}`) // html
+        return response.data;
+      }).catch(error => {
+        // console.log(`getHtmlNative error: ${error}`)
+        // console.log(`getHtmlNative error.data: ${error.error}`)
+        return error.error;
+      })
   }
 }
