@@ -18,7 +18,7 @@
   </ion-button> -->
   <ion-content>
 
-    <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar> -->
+    <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar>
 
     <!-- <ion-button (click)="toggleInfiniteScroll()" expand="block">
         Toggle Infinite Scroll
@@ -35,13 +35,16 @@
 
       <!-- </ion-item> -->
 
-      <ion-item button no-lines [color]="even? '' : 'light'" *ngFor="let item of data; let even = even" [routerLink]="['/', 'buddha', item.id]">
+      <ion-item button no-lines [color]="even? '' : 'light'" *ngFor="let item of data; let even = even"
+        [routerLink]="['/', 'buddha', item.id]" [disabled]="item.page">
+        
+        <p><strong>{{ item.page }}</strong></p>
+
         <ion-label class="ion-text-wrap">
           <h3>{{ item.id }}</h3>
           {{ item.title }}
         </ion-label>
       </ion-item>
-
     </ion-list>
 
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreData($event)">
@@ -51,3 +54,9 @@
 
   </ion-content>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>Page {{ pageNo }} / Page {{ totalPage }}</ion-title>
+  </ion-toolbar>
+</ion-footer>

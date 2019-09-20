@@ -14,7 +14,7 @@ import {
 import {
   ChatService,
   ChatMessage
-} from "../../services/chat/chat.service";
+} from '../../services/chat/chat.service';
 
 
 @Component({
@@ -26,11 +26,11 @@ export class ChatPage implements OnInit {
   @ViewChild(IonContent) ionContent: IonContent;
 
   msgList: ChatMessage[] = [];
-  userId: string = '140000198202211138';
-  userName: string = 'Goku';
-  userImgUrl: string = '../../../assets/img/goku.png';
-  toUserId: string = '210000198410281948';
-  editorMsg: string = '';
+  userId = '140000198202211138';
+  userName = 'Goku';
+  userImgUrl = '../../../assets/img/goku.png';
+  toUserId = '210000198410281948';
+  editorMsg = '';
   constructor(
     // public navCtrl: NavController,
     // public navParams: NavParams,
@@ -41,9 +41,9 @@ export class ChatPage implements OnInit {
   }
 
   ngOnInit() {
-    this.events.subscribe('chat:received',(msg,time) => {
-      this.pushNewMsg(msg)
-    })
+    this.events.subscribe('chat:received', (msg, time) => {
+      this.pushNewMsg(msg);
+    });
     this.chatService.getMsglist().subscribe(chats => {
       this.msgList = chats['array'] as ChatMessage[];
       this.scrollToBottom();
@@ -52,7 +52,7 @@ export class ChatPage implements OnInit {
 
   sendMsg() {
     const id = Date.now().toString();
-    let newMsg: ChatMessage = {
+    const newMsg: ChatMessage = {
       messageId: Date.now().toString(),
       userId: this.userId,
       userName: this.userName,
@@ -68,15 +68,15 @@ export class ChatPage implements OnInit {
 
     this.chatService.sendMsg(newMsg)
       .then(() => {
-        let index = this.getMsgIndexById(id);
+        const index = this.getMsgIndexById(id);
         if (index !== -1) {
           this.msgList[index].status = 'success';
         }
-      })
+      });
   }
 
   getMsgIndexById(id: string) {
-    return this.msgList.findIndex(e => e.messageId === id)
+    return this.msgList.findIndex(e => e.messageId === id);
   }
 
   pushNewMsg(msg: ChatMessage): string {
@@ -86,7 +86,7 @@ export class ChatPage implements OnInit {
       this.msgList.push(msg);
     }
     this.scrollToBottom();
-    return msg.messageId
+    return msg.messageId;
   }
 
   scrollToBottom() {
@@ -94,7 +94,6 @@ export class ChatPage implements OnInit {
       if (this.ionContent.scrollToBottom) {
         this.ionContent.scrollToBottom();
       }
-    }, 100)
+    }, 100);
   }
-
 }

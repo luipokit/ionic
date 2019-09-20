@@ -47,7 +47,7 @@ export class BuddhaService {
     // console.log(`param_title: ${param_title}`)
 
     return this.http.get(`${this.PROD_SERVER_URL}&pageNo=${pageNo}&title=${param_title}&id=${param_id}`).pipe(
-      map(results => results['data'])
+      // map(results => results['data'])
     );
   }
 
@@ -72,6 +72,6 @@ export class BuddhaService {
         // console.log(`getHtmlNative error: ${error}`)
         // console.log(`getHtmlNative error.data: ${error.error}`)
         return error.error;
-      })
+      });
   }
 }

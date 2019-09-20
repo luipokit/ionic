@@ -14,9 +14,9 @@ import {
 } from '@ionic/angular';
 
 export interface Work {
-  confirmation: string,
-    data: object,
-    pages: number
+  confirmation: string;
+  data: object;
+  pages: number;
 }
 
 @Injectable({
@@ -42,8 +42,8 @@ export class UtilsService {
     parameters: any,
     headers: any,
     success: (result: any) => void,
-    error ? : (error: any) => void,
-    done ? : () => void
+    error ?: (error: any) => void,
+    done ?: () => void
   ) {
 
     if (!parameters) {
@@ -91,8 +91,8 @@ export class UtilsService {
     } else {
       this.http.get(url, options)
         .subscribe((result: any) => {
-          console.log(`result.data ${result.data}`)
-          success(result)
+          console.log(result);
+          success(result);
         }, (result: any) => {
           error(JSON.parse(result.error));
         }).add(done);
@@ -104,8 +104,8 @@ export class UtilsService {
     body: any,
     headers: any,
     success: (result: any) => void,
-    error ? : (error: any) => void,
-    done ? : () => void
+    error ?: (error: any) => void,
+    done ?: () => void
   ) {
 
     if (!error) {
@@ -122,7 +122,7 @@ export class UtilsService {
 
     this.http.post(url, body, options)
       .subscribe((result: any) => {
-        success(result.data)
+        success(result.data);
       }, (result: any) => {
         console.log(result.error);
         error(result.error);

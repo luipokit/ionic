@@ -39,6 +39,7 @@ export class BuddhaPage implements OnInit {
   searchTerm = '';
   data = [];
   pageNo = 0;
+  totalPage = 0;
   size = 10;
 
   constructor(
@@ -57,19 +58,21 @@ export class BuddhaPage implements OnInit {
         'pageNo': this.pageNo.toString(),
         'size': this.size.toString()
       }, {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       },
       response => {
         if (this.platform.is('cordova')) {
-          let obj = JSON.parse(response);
-          for (const newData of obj.data) {
-            // console.log(newData);
+          const responseObj = JSON.parse(response);
+          console.table(responseObj);
+          for (const newData of responseObj.data) {
             this.data.push(newData);
           }
         } else {
+          console.table(response.data);
+          this.data.push({'page' : `Page ${this.pageNo}`});
+          this.totalPage = response.pages;
           for (const newData of response.data) {
-            console.log(newData)
             this.data.push(newData);
           }
         }
@@ -84,13 +87,19 @@ export class BuddhaPage implements OnInit {
   }
 
   ngOnInit() {
-    this.loadBuddha();
+    if (this.searchTerm === '' || this.searchTerm == null) {
+      this.loadBuddha();
+    }
     // this.getData();
   }
 
   loadMoreData(event) {
     setTimeout(() => {
-      this.loadBuddha();
+      if (this.searchTerm === '' || this.searchTerm == null) {
+        this.loadBuddha();
+      } else {
+        this.loadBuddhaSearchData();
+      }
       event.target.complete();
     }, 1000);
   }
@@ -100,16 +109,36 @@ export class BuddhaPage implements OnInit {
   }
 
   searchChanged() {
+    this.pageNo = 1;
     this.results = this.buddhaService.searchData(this.searchTerm, this.pageNo);
-    this.results.subscribe(data => {
-      console.log(data);
+    this.results.subscribe(response => {
+      console.table(response);
+      this.data = [];
+      this.data.push({'page' : `Page ${this.pageNo}`});
+      this.totalPage = response.pages;
+      for (const data of response['data']) {
+        this.data.push(data);
+      }
     });
   }
 
   getData() {
-    let temp = this.buddhaService.getData(this.utils.PROD_SERVER_URL);
+    this.buddhaService.getData(this.utils.PROD_SERVER_URL);
     // temp.subscribe(data => {
     //   console.log(data);
     // });
+  }
+
+  loadBuddhaSearchData() {
+    this.pageNo += 1;
+    this.results = this.buddhaService.searchData(this.searchTerm, this.pageNo);
+    this.results.subscribe(response => {
+      console.table(response);
+      this.data.push({'page' : `Page ${this.pageNo}`});
+      this.totalPage = response.pages;
+      for (const data of response['data']) {
+        this.data.push(data);
+      }
+    });
   }
 }
