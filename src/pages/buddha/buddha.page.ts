@@ -49,6 +49,13 @@ export class BuddhaPage implements OnInit {
     private http: HttpClient
   ) {}
 
+  ngOnInit() {
+    if (this.searchTerm === '' || this.searchTerm == null) {
+      this.loadBuddha();
+    }
+    // this.getData();
+  }
+
   loadBuddha() {
 
     this.pageNo += 1;
@@ -62,19 +69,21 @@ export class BuddhaPage implements OnInit {
         'Content-Type': 'application/json'
       },
       response => {
+        let scriptures: any;
+
         if (this.platform.is('cordova')) {
-          const responseObj = JSON.parse(response);
-          console.table(responseObj);
-          for (const newData of responseObj.data) {
-            this.data.push(newData);
-          }
+          scriptures = JSON.parse(response);
         } else {
-          console.table(response.data);
-          this.data.push({'page' : `Page ${this.pageNo}`});
-          this.totalPage = response.pages;
-          for (const newData of response.data) {
-            this.data.push(newData);
-          }
+          scriptures = response;
+        }
+
+        console.table(scriptures.data);
+        this.data.push({
+          'page': `Page ${this.pageNo}`
+        });
+        this.totalPage = scriptures.pages;
+        for (const newData of scriptures.data) {
+          this.data.push(newData);
         }
       },
       error => {
@@ -84,13 +93,6 @@ export class BuddhaPage implements OnInit {
         console.log(`Get Page ${this.pageNo} !`);
       }
     );
-  }
-
-  ngOnInit() {
-    if (this.searchTerm === '' || this.searchTerm == null) {
-      this.loadBuddha();
-    }
-    // this.getData();
   }
 
   loadMoreData(event) {
@@ -109,17 +111,97 @@ export class BuddhaPage implements OnInit {
   }
 
   searchChanged() {
+
     this.pageNo = 1;
-    this.results = this.buddhaService.searchData(this.searchTerm, this.pageNo);
-    this.results.subscribe(response => {
-      console.table(response);
-      this.data = [];
-      this.data.push({'page' : `Page ${this.pageNo}`});
-      this.totalPage = response.pages;
-      for (const data of response['data']) {
-        this.data.push(data);
+    this.data = [{
+      'page': `Page ${this.pageNo}`
+    }];
+
+    const {
+      param_title,
+      param_id
+    } = this.buddhaService.isTitleOrID(this.searchTerm);
+
+    this.utils.HttpGet(
+      this.utils.PROD_SERVER_URL, {
+        'id': param_id,
+        'title': param_title,
+        'pageNo': this.pageNo.toString(),
+        'size': this.size.toString()
+      }, {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      response => {
+        let scripturesSearch: any;
+
+        if (this.platform.is('cordova')) {
+          scripturesSearch = JSON.parse(response);
+        } else {
+          scripturesSearch = response;
+        }
+
+        console.table(scripturesSearch.data);
+        this.totalPage = scripturesSearch.pages;
+        for (const newData of scripturesSearch.data) {
+          this.data.push(newData);
+        }
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        console.log(`Get Page ${this.pageNo} !`);
       }
-    });
+    );
+  }
+
+  loadBuddhaSearchData() {
+
+    if (this.pageNo < this.totalPage) {
+      this.pageNo += 1;
+      const {
+        param_title,
+        param_id
+      } = this.buddhaService.isTitleOrID(this.searchTerm);
+
+      this.utils.HttpGet(
+        this.utils.PROD_SERVER_URL, {
+          'id': param_id,
+          'title': param_title,
+          'pageNo': this.pageNo.toString(),
+          'size': this.size.toString()
+        }, {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        response => {
+          let scripturesSearch: any;
+          if (this.platform.is('cordova')) {
+            scripturesSearch = JSON.parse(response);
+          } else {
+            scripturesSearch = response;
+          }
+
+          console.table(scripturesSearch.data);
+
+          this.data.push({
+            'page': `Page ${this.pageNo}`
+          });
+
+          this.totalPage = scripturesSearch.pages;
+          for (const newData of scripturesSearch.data) {
+            this.data.push(newData);
+          }
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          console.log(`Get Page ${this.pageNo} !`);
+        }
+      );
+    }
   }
 
   getData() {
@@ -127,18 +209,5 @@ export class BuddhaPage implements OnInit {
     // temp.subscribe(data => {
     //   console.log(data);
     // });
-  }
-
-  loadBuddhaSearchData() {
-    this.pageNo += 1;
-    this.results = this.buddhaService.searchData(this.searchTerm, this.pageNo);
-    this.results.subscribe(response => {
-      console.table(response);
-      this.data.push({'page' : `Page ${this.pageNo}`});
-      this.totalPage = response.pages;
-      for (const data of response['data']) {
-        this.data.push(data);
-      }
-    });
   }
 }

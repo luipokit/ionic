@@ -34,13 +34,7 @@ export class BuddhaService {
   ) {}
 
   searchData(title: string, pageNo: number) {
-    const REGEX_CHINESE = /[\u4e00-\u9fff]|[\u3400-\u4dbf]|[\u{20000}-\u{2a6df}]|[\u{2a700}-\u{2b73f}]|[\u{2b740}-\u{2b81f}]|[\u{2b820}-\u{2ceaf}]|[\uf900-\ufaff]|[\u3300-\u33ff]|[\ufe30-\ufe4f]|[\uf900-\ufaff]|[\u{2f800}-\u{2fa1f}]/u;
-    // const hasChinese = (title) => REGEX_CHINESE.test(title);
-
-    let param_id = '';
-    let param_title = '';
-
-    REGEX_CHINESE.test(title) ? param_title = title : param_id = title;
+    const { param_title, param_id } = this.isTitleOrID(title);
 
     // console.log(`title: ${title}`)
     // console.log(`param_id: ${param_id}`)
@@ -49,6 +43,15 @@ export class BuddhaService {
     return this.http.get(`${this.PROD_SERVER_URL}&pageNo=${pageNo}&title=${param_title}&id=${param_id}`).pipe(
       // map(results => results['data'])
     );
+  }
+
+  isTitleOrID(title: string) {
+    const REGEX_CHINESE = /[\u4e00-\u9fff]|[\u3400-\u4dbf]|[\u{20000}-\u{2a6df}]|[\u{2a700}-\u{2b73f}]|[\u{2b740}-\u{2b81f}]|[\u{2b820}-\u{2ceaf}]|[\uf900-\ufaff]|[\u3300-\u33ff]|[\ufe30-\ufe4f]|[\uf900-\ufaff]|[\u{2f800}-\u{2fa1f}]/u;
+    // const hasChinese = (title) => REGEX_CHINESE.test(title);
+    let param_id = '';
+    let param_title = '';
+    REGEX_CHINESE.test(title) ? param_title = title : param_id = title;
+    return { param_title, param_id };
   }
 
   getData(url) {

@@ -51,6 +51,11 @@ export class AppComponent {
       title: 'Chat',
       url: '/chat',
       icon: 'chatboxes'
+    },
+    {
+      title: 'Sicbo',
+      url: '/sicbo',
+      icon: 'help-buoy'
     }
   ];
 

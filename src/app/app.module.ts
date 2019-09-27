@@ -22,6 +22,9 @@ import {
   SQLite,
   SQLiteObject
 } from '@ionic-native/sqlite/ngx';
+import {
+  Keyboard
+} from '@ionic-native/keyboard/ngx';
 
 import {
   AppComponent
@@ -66,7 +69,8 @@ import {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
     },
-    HTTP
+    HTTP,
+    Keyboard,
   ],
   bootstrap: [AppComponent],
 })

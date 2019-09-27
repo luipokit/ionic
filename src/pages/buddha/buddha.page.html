@@ -13,46 +13,34 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-button (click)="showData()">
-    Show Data
-  </ion-button> -->
-  <ion-content>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar>
 
-    <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar>
-
-    <!-- <ion-button (click)="toggleInfiniteScroll()" expand="block">
-        Toggle Infinite Scroll
-      </ion-button> -->
-
-    <ion-list>
-
-      <!-- <ion-item button *ngFor="let item of (results | async)" [routerLink]="['/', 'movies', item.imdbID]"> -->
-
-      <!-- <ion-label class="ion-text-wrap">
-            <h3>{{ item.id }}</h3>
-            {{ item.title }}
-          </ion-label> -->
-
-      <!-- </ion-item> -->
-
+  <!-- <ion-list>
       <ion-item button no-lines [color]="even? '' : 'light'" *ngFor="let item of data; let even = even"
         [routerLink]="['/', 'buddha', item.id]" [disabled]="item.page">
-        
         <p><strong>{{ item.page }}</strong></p>
-
         <ion-label class="ion-text-wrap">
           <h3>{{ item.id }}</h3>
           {{ item.title }}
         </ion-label>
       </ion-item>
-    </ion-list>
+    </ion-list> -->
 
-    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreData($event)">
-      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+  <ion-list>
+    <ion-item no-lines [color]="even? '' : 'light'" *ngFor="let item of data; let even = even">
+      <p><strong>{{ item.page }}</strong></p>
+      <ion-label class="ion-text-wrap" [routerLink]="['/', 'buddha', item.id]">
+        <h3>{{ item.id }}</h3>
+        {{ item.title }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
-  </ion-content>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>
 
 <ion-footer>

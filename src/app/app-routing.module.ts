@@ -51,9 +51,13 @@ const routes: Routes = [{
     path: 'chat',
     loadChildren: '../pages/chat/chat.module#ChatPageModule'
   },
-  { 
-    path: 'profile', 
-    loadChildren: '../pages/profile/profile.module#ProfilePageModule' 
+  {
+    path: 'profile',
+    loadChildren: '../pages/profile/profile.module#ProfilePageModule'
+  },
+  {
+    path: 'sicbo',
+    loadChildren: '../pages/sicbo/sicbo.module#SicboPageModule'
   }
 ];
 

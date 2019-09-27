@@ -15,6 +15,9 @@ import {
   ChatService,
   ChatMessage
 } from '../../services/chat/chat.service';
+import {
+  Keyboard
+} from '@ionic-native/keyboard/ngx';
 
 
 @Component({
@@ -35,9 +38,11 @@ export class ChatPage implements OnInit {
     // public navCtrl: NavController,
     // public navParams: NavParams,
     public chatService: ChatService,
-    public events: Events
+    public events: Events,
+    private keyboard: Keyboard,
   ) {
-
+    // this.keyboard.setResizeMode()
+    // this.keyboard.setResizeMode('ionic');
   }
 
   ngOnInit() {
@@ -92,6 +97,14 @@ export class ChatPage implements OnInit {
   scrollToBottom() {
     setTimeout(() => {
       if (this.ionContent.scrollToBottom) {
+        this.ionContent.scrollToBottom();
+      }
+    }, 100);
+  }
+
+  forceScrollTop() {
+    setTimeout(() => {
+      while (!this.ionContent.ionScrollEnd) {
         this.ionContent.scrollToBottom();
       }
     }, 100);
