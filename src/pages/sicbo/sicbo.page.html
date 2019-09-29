@@ -1,82 +1,183 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Sicbo</ion-title>
+    <div slot='end'>
+      <ion-button block class="ion-margin" size="small" color="dark" (click)="addCash()" slot='end'>
+        ADD CASH
+      </ion-button>
+    </div>
+    <div slot='end'>
+      <ion-button block [disabled]="true" class="ion-margin" size="small" color="dark" slot='end'>
+        CASH: ${{cash}}
+      </ion-button>
+    </div>
+    <ion-button class="ion-margin" size="small" color="light" (click)="throwDice()" slot='end'>
+      Throw Dice
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding ion-text-center ion-no-margin">
+<ion-content class="center ion-text-center ion-no-margin">
   <ion-grid>
     <ion-row>
       <ion-col size='3'>
-        <h1>Small</h1>
-        <br />
-        <br />
-        <br />
+        <div (click)="onClickBig()">
+          <h1>大</h1>
+          <h1>BIG</h1>
+          <p>11 - 17</p>
+        </div>
       </ion-col>
       <ion-col size='6' class="ion-no-padding">
         <ion-row>
-          <ion-col>
-            666
-            <br />
-            <br>
+          <ion-col style="padding:1px;">
+            <ion-row class="row">
+              <div (click)="onClickTriple6()">
+                <ion-img class="column double" src="../../assets/img/dice_6.png"></ion-img>
+                <ion-img class="column double" src="../../assets/img/dice_6.png"></ion-img>
+                <ion-img class="column double" src="../../assets/img/dice_6.png"></ion-img>
+              </div>
+            </ion-row>
           </ion-col>
-          <ion-col>
-            555
-            <br />
-            <br>
+          <ion-col style="padding:1px;">
+            <ion-row class="row">
+              <div (click)="onClickTriple5()">
+                <ion-img class="column double" src="../../assets/img/dice_5.png"></ion-img>
+                <ion-img class="column double" src="../../assets/img/dice_5.png"></ion-img>
+                <ion-img class="column double" src="../../assets/img/dice_5.png"></ion-img>
+              </div>
+            </ion-row>
           </ion-col>
-          <ion-col>
-            444
-            <br />
-            <br />
+          <ion-col style="padding:1px;">
+            <ion-row class="row">
+              <div (click)="onClickTriple4()">
+                <ion-img class="column double" src="../../assets/img/dice_4.png"></ion-img>
+                <ion-img class="column double" src="../../assets/img/dice_4.png"></ion-img>
+                <ion-img class="column double" src="../../assets/img/dice_4.png"></ion-img>
+              </div>
+            </ion-row>
           </ion-col>
-          <ion-col>
-            333
-            <br />
-            <br>
+          <ion-col style="padding:1px;">
+            <ion-row class="row">
+              <div (click)="onClickTriple3()">
+                <ion-img class="column double" src="../../assets/img/dice_3.png"></ion-img>
+                <ion-img class="column double" src="../../assets/img/dice_3.png"></ion-img>
+                <ion-img class="column double" src="../../assets/img/dice_3.png"></ion-img>
+              </div>
+            </ion-row>
           </ion-col>
-          <ion-col>
-            222
-            <br />
-            <br>
+          <ion-col style="padding:1px;">
+            <ion-row class="row">
+              <div (click)="onClickTriple2()">
+                <ion-img class="column double" src="../../assets/img/dice_2.png"></ion-img>
+                <ion-img class="column double" src="../../assets/img/dice_2.png"></ion-img>
+                <ion-img class="column double" src="../../assets/img/dice_2.png"></ion-img>
+              </div>
+            </ion-row>
           </ion-col>
-          <ion-col>
-            111
-            <br />
-            <br>
+          <ion-col style="padding:1px;">
+            <ion-row class="row">
+              <div (click)="onClickTriple1()">
+                <ion-img class="column double" src="../../assets/img/dice_1.png"></ion-img>
+                <ion-img class="column double" src="../../assets/img/dice_1.png"></ion-img>
+                <ion-img class="column double" src="../../assets/img/dice_1.png"></ion-img>
+              </div>
+            </ion-row>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <p class='ion-no-margin'>IN THESE SQUARES 1 WINS 150</p>
+            <p class='ion-no-margin'>1 WINS 150</p>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size='4/3'>
-            66
-            <br />
-            <br />
-            <br>
+            <div>
+              <ion-img class="double" src="../../assets/img/dice_6.png"></ion-img>
+              <ion-img class="double" src="../../assets/img/dice_6.png"></ion-img>
+            </div>
           </ion-col>
           <ion-col size='4/3'>
-            55
+            <div>
+              <ion-img class="double" src="../../assets/img/dice_5.png"></ion-img>
+              <ion-img class="double" src="../../assets/img/dice_5.png"></ion-img>
+            </div>
           </ion-col>
           <ion-col size='4/3'>
-            44
+            <div>
+              <ion-img class="double" src="../../assets/img/dice_4.png"></ion-img>
+              <ion-img class="double" src="../../assets/img/dice_4.png"></ion-img>
+            </div>
           </ion-col>
           <ion-col size='4'>
-            <div>111 222</div>
-            <div>333 444</div>
-            <div>555 666</div>
+            <ion-row>
+              <ion-col style="padding:0px; border:0px;">
+                <ion-row class="row">
+                  <ion-img class="column double" src="../../assets/img/dice_6.png"></ion-img>
+                  <ion-img class="column double" src="../../assets/img/dice_6.png"></ion-img>
+                  <ion-img class="column double" src="../../assets/img/dice_6.png"></ion-img>
+                </ion-row>
+              </ion-col>
+              <ion-col style="padding:0px; border:0px;">
+                <ion-row class="row">
+                  <ion-img class="column double" src="../../assets/img/dice_5.png"></ion-img>
+                  <ion-img class="column double" src="../../assets/img/dice_5.png"></ion-img>
+                  <ion-img class="column double" src="../../assets/img/dice_5.png"></ion-img>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col style="padding:0px; border:0px;">
+                <ion-row class="row">
+                  <ion-img class="column double" src="../../assets/img/dice_4.png"></ion-img>
+                  <ion-img class="column double" src="../../assets/img/dice_4.png"></ion-img>
+                  <ion-img class="column double" src="../../assets/img/dice_4.png"></ion-img>
+                </ion-row>
+              </ion-col>
+              <ion-col style="padding:0px; border:0px;">
+                <ion-row class="row">
+                  <ion-img class="column double" src="../../assets/img/dice_3.png"></ion-img>
+                  <ion-img class="column double" src="../../assets/img/dice_3.png"></ion-img>
+                  <ion-img class="column double" src="../../assets/img/dice_3.png"></ion-img>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col style="padding:0px; border:0px;">
+                <ion-row class="row">
+                  <ion-img class="column double" src="../../assets/img/dice_2.png"></ion-img>
+                  <ion-img class="column double" src="../../assets/img/dice_2.png"></ion-img>
+                  <ion-img class="column double" src="../../assets/img/dice_2.png"></ion-img>
+                </ion-row>
+              </ion-col>
+              <ion-col style="padding:0px; border:0px;">
+                <ion-row class="row">
+                  <ion-img class="column double" src="../../assets/img/dice_1.png"></ion-img>
+                  <ion-img class="column double" src="../../assets/img/dice_1.png"></ion-img>
+                  <ion-img class="column double" src="../../assets/img/dice_1.png"></ion-img>
+                </ion-row>
+              </ion-col>
+            </ion-row>
           </ion-col>
           <ion-col size='4/3'>
-            33
+            <div>
+              <ion-img class="double" src="../../assets/img/dice_3.png"></ion-img>
+              <ion-img class="double" src="../../assets/img/dice_3.png"></ion-img>
+            </div>
           </ion-col>
           <ion-col size='4/3'>
-            22
+            <div>
+              <ion-img class="double" src="../../assets/img/dice_2.png"></ion-img>
+              <ion-img class="double" src="../../assets/img/dice_2.png"></ion-img>
+            </div>
           </ion-col>
           <ion-col size='4/3'>
-            11
+            <div>
+              <ion-img class="double" src="../../assets/img/dice_1.png"></ion-img>
+              <ion-img class="double" src="../../assets/img/dice_1.png"></ion-img>
+            </div>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -92,75 +193,134 @@
         </ion-row>
       </ion-col>
       <ion-col size='3'>
-        <h1>BIG</h1>
-        <br />
-        <br />
-        <br />
+        <div (click)="onClickSmall()">
+          <h1>小</h1>
+          <h1>SMALL</h1>
+          <p>4 - 10</p>
+        </div>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <p class='ion-no-margin'>17 / 4</p>
-        <p>1 WINS 50</p>
+        <h1 class='ion-no-margin'>17</h1>
+        <!-- <p>1 WINS 50</p> -->
       </ion-col>
       <ion-col>
-        <p class='ion-no-margin'>16 / 5</p>
-        <p>1 WINS 18</p>
+        <h1 class='ion-no-margin'>16</h1>
+        <!-- <p>1 WINS 18</p> -->
       </ion-col>
       <ion-col>
-        <p class='ion-no-margin'>15 / 6</p>
-        <p>1 WINS 14</p>
+        <h1 class='ion-no-margin'>15</h1>
+        <!-- <p>1 WINS 14</p> -->
       </ion-col>
       <ion-col>
-        <p class='ion-no-margin'>14 / 7</p>
-        <p>1 WINS 12</p>
+        <h1 class='ion-no-margin'>14</h1>
+        <!-- <p>1 WINS 12</p> -->
       </ion-col>
       <ion-col>
-        <p class='ion-no-margin'>13 / 8</p>
-        <p>1 WINS 8</p>
+        <h1 class='ion-no-margin'>13</h1>
+        <!-- <p>1 WINS 8</p> -->
       </ion-col>
       <ion-col>
-        <p class='ion-no-margin'>12 / 9</p>
-        <p>1 WINS 6</p>
+        <h1 class='ion-no-margin'>12</h1>
+        <!-- <p>1 WINS 6</p> -->
       </ion-col>
       <ion-col>
-        <p class='ion-no-margin'>11 / 10</p>
-        <p>1 WINS 6</p>
+        <h1 class='ion-no-margin'>11</h1>
+        <!-- <p>1 WINS 6</p> -->
       </ion-col>
-    </ion-row>
-
-    <ion-row>
+      <ion-col>
+        <h1 class='ion-no-margin'>10</h1>
+        <!-- <p>1 WINS 6</p> -->
+      </ion-col>
+      <ion-col>
+        <h1 class='ion-no-margin'>9</h1>
+        <!-- <p>1 WINS 6</p> -->
+      </ion-col>
+      <ion-col>
+        <h1 class='ion-no-margin'>8</h1>
+        <!-- <p>1 WINS 8</p> -->
+      </ion-col>
+      <ion-col>
+        <h1 class='ion-no-margin'>7</h1>
+        <!-- <p>1 WINS 12</p> -->
+      </ion-col>
       <ion-col>
         <h1 class='ion-no-margin'>6</h1>
-        <br>
-        <br>
+        <!-- <p>1 WINS 14</p> -->
       </ion-col>
       <ion-col>
         <h1 class='ion-no-margin'>5</h1>
-        <br>
-        <br>
+        <!-- <p>1 WINS 18</p> -->
       </ion-col>
       <ion-col>
         <h1 class='ion-no-margin'>4</h1>
-        <br>
-        <br>
+        <!-- <p>1 WINS 50</p> -->
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <div>
+          <ion-img src="../../assets/img/dice_6.png"></ion-img>
+        </div>
       </ion-col>
       <ion-col>
-        <h1 class='ion-no-margin'>3</h1>
-        <br>
-        <br>
+        <div>
+          <ion-img src="../../assets/img/dice_5.png"></ion-img>
+        </div>
       </ion-col>
       <ion-col>
-        <h1 class='ion-no-margin'>2</h1>
-        <br>
-        <br>
+        <div>
+          <ion-img src="../../assets/img/dice_4.png"></ion-img>
+        </div>
       </ion-col>
       <ion-col>
-        <h1 class='ion-no-margin'>1</h1>
-        <br>
-        <br>
+        <div>
+          <ion-img src="../../assets/img/dice_3.png"></ion-img>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <ion-img src="../../assets/img/dice_2.png"></ion-img>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <ion-img src="../../assets/img/dice_1.png"></ion-img>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar class="row center ion-text-center ion-no-margin">
+    <div class="footerColumn">
+      <ion-img src="../../assets/img/online-casino-free-bonus-chips.png"></ion-img>
+    </div>
+    <div class="footerColumn">
+      <ion-button (click)="click100()" color="{{cash100.color}}">100</ion-button>
+    </div>
+    <div class="footerColumn">
+      <ion-button (click)="click200()" color="{{cash200.color}}">200</ion-button>
+    </div>
+    <div class="footerColumn">
+      <ion-button (click)="click500()" color="{{cash500.color}}">500</ion-button>
+    </div>
+    <div class="footerColumn">
+      <ion-button (click)="click1000()" color="{{cash1000.color}}">1000</ion-button>
+    </div>
+    <div class="footerColumn">
+      <ion-button (click)="click2000()" color="{{cash2000.color}}">2000</ion-button>
+    </div>
+    <div class="footerColumn">
+      <ion-button (click)="click5000()" color="{{cash5000.color}}">5000</ion-button>
+    </div>
+    <div class="footerColumn">
+      <ion-button (click)="click10000()" color="{{cash10000.color}}">10000</ion-button>
+    </div>
+
+  </ion-toolbar>
+</ion-footer>
