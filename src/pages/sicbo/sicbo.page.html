@@ -5,7 +5,12 @@
     </ion-buttons>
     <ion-title>Sicbo</ion-title>
     <div slot='end'>
-      <ion-button block class="ion-margin" size="small" color="dark" (click)="addCash()" slot='end'>
+      <ion-button block class="ion-margin" size="small" color="dark" slot='end'>
+        Timer: {{timer}}
+      </ion-button>
+    </div>
+    <div slot='end'>
+      <ion-button block class="ion-margin" size="small" color="light" (click)="addCash()" slot='end'>
         ADD CASH
       </ion-button>
     </div>
@@ -14,9 +19,9 @@
         CASH: ${{cash}}
       </ion-button>
     </div>
-    <ion-button class="ion-margin" size="small" color="light" (click)="throwDice()" slot='end'>
+    <!-- <ion-button class="ion-margin" size="small" color="light" (click)="throwDice()" slot='end'>
       Throw Dice
-    </ion-button>
+    </ion-button> -->
   </ion-toolbar>
 </ion-header>
 

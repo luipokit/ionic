@@ -45,3 +45,7 @@ Debug specs in the browser in the same way that you debug an application.
 5. Open the app.component.spec.ts test file (Control/Command-P, then start typing the name of the file).
 6. Set a breakpoint in the test.
 7. Refresh the browser, and it stops at the breakpoint.
+
+## Modal
+
+ref. https://forum.ionicframework.com/t/solved-ionic-4-need-to-know-how-to-work-the-modal-controller/136414/4

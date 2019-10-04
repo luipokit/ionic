@@ -58,6 +58,10 @@ const routes: Routes = [{
   {
     path: 'sicbo',
     loadChildren: '../pages/sicbo/sicbo.module#SicboPageModule'
+  },
+  {
+    path: 'sicbo-result',
+    loadChildren: '../pages/sicbo-result/sicbo-result.module#SicboResultPageModule'
   }
 ];
 

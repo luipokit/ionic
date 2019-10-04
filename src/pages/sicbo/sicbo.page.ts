@@ -6,6 +6,13 @@ import {
   forEach
 } from '@angular/router/src/utils/collection';
 
+import {
+  ModalController
+} from '@ionic/angular';
+import {
+  SicboResultPage
+} from '../sicbo-result/sicbo-result.page';
+
 @Component({
   selector: 'app-sicbo',
   templateUrl: './sicbo.page.html',
@@ -101,10 +108,105 @@ export class SicboPage implements OnInit {
 
   public isSelected = 'dark';
 
-  constructor() {}
+  public currentModal = null;
+
+  constructor(
+    public modalController: ModalController
+  ) {}
+
+  public ID;
+  public timer = 10;
 
   ngOnInit() {
     this.click100();
+
+    const delay = function (s) {
+      return new Promise(function (resolve, reject) {
+        setTimeout(resolve, s);
+      });
+    };
+
+    const recursion = () => delay(0)
+      .then(() => {
+        this.timer -= 1;
+        return delay(1000);
+      })
+      .then(() => {
+        this.timer -= 1;
+        return delay(1000);
+      })
+      .then(() => {
+        this.timer -= 1;
+        return delay(1000);
+      })
+      .then(() => {
+        this.timer -= 1;
+        return delay(1000);
+      })
+      .then(() => {
+        this.timer -= 1;
+        return delay(1000);
+      })
+      .then(() => {
+        this.timer -= 1;
+        return delay(1000);
+      })
+      .then(() => {
+        this.timer -= 1;
+        return delay(1000);
+      })
+      .then(() => {
+        this.timer -= 1;
+        return delay(1000);
+      })
+      .then(() => {
+        this.timer -= 1;
+        return delay(1000);
+      })
+      .then(() => {
+        this.timer -= 1;
+        return delay(1000);
+      })
+      .then(() => {
+        this.throwDice();
+        recursion2();
+      });
+
+    const recursion2 = () => delay(0)
+      .then(() => {
+        return delay(2000);
+      }).then(() => {
+        this.dismissModal();
+        this.timer += 10;
+        recursion();
+      });
+
+    recursion();
+  }
+
+  async presentModal() {
+    console.log(this.sicboList);
+    this.currentModal = await this.modalController.create({
+      component: SicboResultPage,
+      componentProps: {
+        'first': this.sicboList[0],
+        'second': this.sicboList[1],
+        'third': this.sicboList[2],
+      },
+      cssClass: 'my-custom-modal-css',
+    });
+    return await this.currentModal.present();
+  }
+
+
+  async dismissModal() {
+    console.log('dismissModal');
+    if (this.currentModal) {
+      console.log('dismissModal Yes');
+      this.currentModal.dismiss().then(() => {
+        this.currentModal = null;
+      });
+    }
   }
 
   throwDice() {
@@ -117,7 +219,8 @@ export class SicboPage implements OnInit {
     this.checkWin(this.sicboList);
 
     // Show result
-    // alert(this.winList);
+    // alert(this.sicboList);
+    this.presentModal();
 
     // Reset all the bet list
     this.resetAllList();
@@ -156,7 +259,7 @@ export class SicboPage implements OnInit {
 
   checkWin(sicboList) {
 
-    sicboList = [1, 1, 2];
+    // sicboList = [1, 1, 2];
 
     // Check Triple
     if (this.checkTriple(sicboList)) {

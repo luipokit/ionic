@@ -46,6 +46,14 @@ import {
   HTTP
 } from '@ionic-native/http/ngx';
 
+import {
+  SicboPageModule
+} from '../../src/pages/sicbo/sicbo.module';
+
+import {
+  SicboResultPageModule
+} from '../../src/pages/sicbo-result/sicbo-result.module';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -60,6 +68,8 @@ import {
     }),
     HttpClientModule,
     HttpClientJsonpModule,
+    SicboPageModule,
+    SicboResultPageModule,
   ],
   providers: [
     StatusBar,

@@ -27,3 +27,11 @@
     --ion-color-medium-shade: var(--ion-color-medium-shade) !important;
     --ion-color-medium-tint: var(-ion-color-medium-tint) !important;
 }
+
+.my-custom-modal-css .modal-wrapper {
+    top: 10%;
+    height: 70%;
+    width: 50%;
+    position: absolute;
+    display: block;
+}
