@@ -240,6 +240,10 @@ export class SicboPage implements OnInit {
     this.resetAllList();
 
     this.storeSicboList.unshift(this.sicboList);
+
+    if (this.storeSicboList.length > 10) {
+      this.storeSicboList.pop();
+    }
     console.table(this.storeSicboList);
   }
 
