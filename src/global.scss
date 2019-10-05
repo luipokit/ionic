@@ -30,8 +30,19 @@
 
 .my-custom-modal-css .modal-wrapper {
     top: 10%;
-    height: 70%;
+    height: 60%;
     width: 50%;
     position: absolute;
     display: block;
+    // --background: transparent !important;
+}
+
+.sicbo-result-storage-modal-css .modal-wrapper {
+    // top: 10%;
+    left: 60%;
+    height: 100%;
+    width: 40%;
+    position: absolute;
+    display: block;
+    // --background: transparent !important;
 }

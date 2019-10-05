@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>History</ion-title>
+    <ion-button fill="icon-only" slot="end" (click)="dismissModal()">
+      >>>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item class='item' no-lines *ngFor="let items of currentStoreSicboList;">
+      <ion-img class="column" [src]="dice_array[items[0]-1].src"></ion-img>
+      <ion-img class="column" [src]="dice_array[items[1]-1].src"></ion-img>
+      <ion-img class="column" [src]="dice_array[items[2]-1].src"></ion-img>
+      <ion-label>{{ items[3] }}</ion-label>
+      <ion-label>{{ items[4] }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

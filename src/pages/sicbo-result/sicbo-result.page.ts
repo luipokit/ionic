@@ -34,6 +34,8 @@ export class SicboResultPage implements OnInit {
   public dice2;
   public dice3;
 
+  public winCash;
+
   constructor(
     public navParams: NavParams
   ) {}
@@ -54,6 +56,9 @@ export class SicboResultPage implements OnInit {
     }
     if (this.navParams.get('third')) {
       this.dice3 = this.dice_array[this.navParams.get('third') - 1].src;
+    }
+    if (this.navParams.get('winCash')) {
+      this.winCash = this.navParams.get('winCash');
     }
   }
 

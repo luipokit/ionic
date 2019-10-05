@@ -54,6 +54,10 @@ import {
   SicboResultPageModule
 } from '../../src/pages/sicbo-result/sicbo-result.module';
 
+import {
+  SicboResultStoragePageModule
+} from '../../src/pages/sicbo-result-storage/sicbo-result-storage.module';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -70,6 +74,7 @@ import {
     HttpClientJsonpModule,
     SicboPageModule,
     SicboResultPageModule,
+    SicboResultStoragePageModule,
   ],
   providers: [
     StatusBar,

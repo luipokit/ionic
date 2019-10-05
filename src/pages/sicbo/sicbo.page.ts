@@ -3,15 +3,14 @@ import {
   OnInit
 } from '@angular/core';
 import {
-  forEach
-} from '@angular/router/src/utils/collection';
-
-import {
   ModalController
 } from '@ionic/angular';
 import {
   SicboResultPage
 } from '../sicbo-result/sicbo-result.page';
+import {
+  SicboResultStoragePage
+} from '../sicbo-result-storage/sicbo-result-storage.page';
 
 @Component({
   selector: 'app-sicbo',
@@ -24,7 +23,7 @@ export class SicboPage implements OnInit {
   Y = 0;
   Z = 0;
 
-  cash = 10000;
+  cash = 200000;
 
   sicboList = [];
   storeSicboList = [];
@@ -119,7 +118,10 @@ export class SicboPage implements OnInit {
 
   ngOnInit() {
     this.click100();
+    this.play();
+  }
 
+  play() {
     const delay = function (s) {
       return new Promise(function (resolve, reject) {
         setTimeout(resolve, s);
@@ -185,24 +187,34 @@ export class SicboPage implements OnInit {
   }
 
   async presentModal() {
-    console.log(this.sicboList);
     this.currentModal = await this.modalController.create({
       component: SicboResultPage,
       componentProps: {
         'first': this.sicboList[0],
         'second': this.sicboList[1],
         'third': this.sicboList[2],
+        'winCash' : this.checkSumUpWin(this.winList)
       },
       cssClass: 'my-custom-modal-css',
     });
     return await this.currentModal.present();
   }
 
+  async presentSicboResultStorageModal() {
+    this.currentModal = await this.modalController.create({
+      component: SicboResultStoragePage,
+      componentProps: {
+        'storeSicboList': this.storeSicboList,
+        'modal' : this.currentModal
+      },
+      cssClass: 'sicbo-result-storage-modal-css',
+    });
+    return await this.currentModal.present();
+  }
+
 
   async dismissModal() {
-    console.log('dismissModal');
     if (this.currentModal) {
-      console.log('dismissModal Yes');
       this.currentModal.dismiss().then(() => {
         this.currentModal = null;
       });
@@ -222,10 +234,12 @@ export class SicboPage implements OnInit {
     // alert(this.sicboList);
     this.presentModal();
 
+    console.table(this.winList);
+
     // Reset all the bet list
     this.resetAllList();
 
-    this.storeSicboList.push(this.sicboList);
+    this.storeSicboList.unshift(this.sicboList);
     console.table(this.storeSicboList);
   }
 
@@ -257,6 +271,11 @@ export class SicboPage implements OnInit {
     return list.reduce((a, b) => a + b, 0);
   }
 
+  checkSumUpWin(winList) {
+    return winList.map((v) => v[1]) // second value of each
+      .reduce((a, b) => a + b); // sum
+  }
+
   checkWin(sicboList) {
 
     // sicboList = [1, 1, 2];
@@ -265,32 +284,47 @@ export class SicboPage implements OnInit {
     if (this.checkTriple(sicboList)) {
 
       if (this.tripleList.length > 0) {
+        this.winList.push([
+          'Triple', this.checkSumUp(this.tripleList) * 25
+        ]);
         this.cash += this.checkSumUp(this.tripleList) * 25;
       }
 
       switch (sicboList[0]) {
         case 1:
-          this.winList.push('Triple 1');
+          this.winList.push([
+            'Triple 1', this.checkSumUp(this.tripleOneList) * 151
+          ]);
           this.cash += this.checkSumUp(this.tripleOneList) * 151;
           break;
         case 2:
-          this.winList.push('Triple 2');
+          this.winList.push([
+            'Triple 2', this.checkSumUp(this.tripleTwoList) * 151
+          ]);
           this.cash += this.checkSumUp(this.tripleTwoList) * 151;
           break;
         case 3:
-          this.winList.push('Triple 3');
+          this.winList.push([
+            'Triple 3', this.checkSumUp(this.tripleThreeList) * 151
+          ]);
           this.cash += this.checkSumUp(this.tripleThreeList) * 151;
           break;
         case 4:
-          this.winList.push('Triple 4');
+          this.winList.push([
+            'Triple 4', this.checkSumUp(this.tripleFourList) * 151
+          ]);
           this.cash += this.checkSumUp(this.tripleFourList) * 151;
           break;
         case 5:
-          this.winList.push('Triple 5');
+          this.winList.push([
+            'Triple 5', this.checkSumUp(this.tripleFiveList) * 151
+          ]);
           this.cash += this.checkSumUp(this.tripleFiveList) * 151;
           break;
         case 6:
-          this.winList.push('Triple 6');
+          this.winList.push([
+            'Triple 6', this.checkSumUp(this.tripleSixList) * 151
+          ]);
           this.cash += this.checkSumUp(this.tripleSixList) * 151;
           break;
         default:
@@ -298,33 +332,53 @@ export class SicboPage implements OnInit {
       }
 
     } else if (this.checkSumUp(sicboList) >= 11 && this.checkSumUp(sicboList) <= 17) {
-      // this.winList.push('Big. You win $' + this.checkSumUp(this.bigList) * 2 + '\n');
+      this.winList.push([
+        'Big', this.checkSumUp(this.bigList) * 2
+      ]);
       this.cash += this.checkSumUp(this.bigList) * 2;
     } else if (this.checkSumUp(sicboList) >= 4 && this.checkSumUp(sicboList) <= 10) {
-      // this.winList.push('Small. You win $' + this.checkSumUp(this.smallList) * 2 + '\n');
+      this.winList.push([
+        'Small', this.checkSumUp(this.smallList) * 2
+      ]);
       this.cash += this.checkSumUp(this.smallList) * 2;
     }
 
     // Check Double
     switch (this.checkDouble(sicboList)) {
       case 1:
-        // this.winList.push('Double 1. You win $' + this.checkSumUp(this.doubleOneList) * 9 + '\n');
+        this.winList.push([
+          'Double 1', this.checkSumUp(this.doubleOneList) * 9
+        ]);
         this.cash += this.checkSumUp(this.doubleOneList) * 9;
         break;
       case 2:
-        // this.winList.push('Double 1. You win $' + this.checkSumUp(this.doubleOneList) * 9 + '\n');
+        this.winList.push([
+          'Double 2', this.checkSumUp(this.doubleTwoList) * 9
+        ]);
         this.cash += this.checkSumUp(this.doubleTwoList) * 9;
         break;
       case 3:
+        this.winList.push([
+          'Double 3', this.checkSumUp(this.doubleThreeList) * 9
+        ]);
         this.cash += this.checkSumUp(this.doubleThreeList) * 9;
         break;
       case 4:
+        this.winList.push([
+          'Double 4', this.checkSumUp(this.doubleFourList) * 9
+        ]);
         this.cash += this.checkSumUp(this.doubleFourList) * 9;
         break;
       case 5:
+        this.winList.push([
+          'Double 5', this.checkSumUp(this.doubleFiveList) * 9
+        ]);
         this.cash += this.checkSumUp(this.doubleFiveList) * 9;
         break;
       case 6:
+        this.winList.push([
+          'Double 6', this.checkSumUp(this.doubleSixList) * 9
+        ]);
         this.cash += this.checkSumUp(this.doubleSixList) * 9;
         break;
       default:
@@ -334,45 +388,87 @@ export class SicboPage implements OnInit {
     // Check Sum
     switch (this.checkSumUp(sicboList)) {
       case 4:
+        this.winList.push([
+          'Sum 4', this.checkSumUp(this.list_4) * 51
+        ]);
         this.cash += this.checkSumUp(this.list_4) * 51;
         break;
       case 5:
+        this.winList.push([
+          'Sum 5', this.checkSumUp(this.list_5) * 19
+        ]);
         this.cash += this.checkSumUp(this.list_5) * 19;
         break;
       case 6:
+        this.winList.push([
+          'Sum 6', this.checkSumUp(this.list_6) * 15
+        ]);
         this.cash += this.checkSumUp(this.list_6) * 15;
         break;
       case 7:
+        this.winList.push([
+          'Sum 7', this.checkSumUp(this.list_7) * 13
+        ]);
         this.cash += this.checkSumUp(this.list_7) * 13;
         break;
       case 8:
+        this.winList.push([
+          'Sum 8', this.checkSumUp(this.list_8) * 9
+        ]);
         this.cash += this.checkSumUp(this.list_8) * 9;
         break;
       case 9:
+        this.winList.push([
+          'Sum 9', this.checkSumUp(this.list_9) * 7
+        ]);
         this.cash += this.checkSumUp(this.list_9) * 7;
         break;
       case 10:
+        this.winList.push([
+          'Sum 10', this.checkSumUp(this.list_10) * 7
+        ]);
         this.cash += this.checkSumUp(this.list_10) * 7;
         break;
       case 11:
+        this.winList.push([
+          'Sum 11', this.checkSumUp(this.list_11) * 7
+        ]);
         this.cash += this.checkSumUp(this.list_11) * 7;
         break;
       case 12:
+        this.winList.push([
+          'Sum 12', this.checkSumUp(this.list_12) * 7
+        ]);
         this.cash += this.checkSumUp(this.list_12) * 7;
         break;
       case 13:
+        this.winList.push([
+          'Sum 13', this.checkSumUp(this.list_13) * 9
+        ]);
         this.cash += this.checkSumUp(this.list_13) * 9;
         break;
       case 14:
+        this.winList.push([
+          'Sum 14', this.checkSumUp(this.list_14) * 13
+        ]);
         this.cash += this.checkSumUp(this.list_14) * 13;
         break;
       case 15:
+        this.winList.push([
+          'Sum 15', this.checkSumUp(this.list_15) * 15
+        ]);
         this.cash += this.checkSumUp(this.list_15) * 15;
         break;
       case 16:
+        this.winList.push([
+          'Sum 16', this.checkSumUp(this.list_16) * 19
+        ]);
         this.cash += this.checkSumUp(this.list_16) * 19;
         break;
       case 17:
+        this.winList.push([
+          'Sum 17', this.checkSumUp(this.list_17) * 51
+        ]);
         this.cash += this.checkSumUp(this.list_17) * 51;
         break;
       default:
@@ -387,21 +483,39 @@ export class SicboPage implements OnInit {
     console.table(counts);
 
     if (counts[1]) {
+      this.winList.push([
+        'Single 1', this.checkSumUp(this.singleOneList) * (counts[1] + 1)
+      ]);
       this.cash += this.checkSumUp(this.singleOneList) * (counts[1] + 1);
     }
     if (counts[2]) {
+      this.winList.push([
+        'Single 2', this.checkSumUp(this.singleTwoList) * (counts[2] + 1)
+      ]);
       this.cash += this.checkSumUp(this.singleTwoList) * (counts[2] + 1);
     }
     if (counts[3]) {
+      this.winList.push([
+        'Single 3', this.checkSumUp(this.singleThreeList) * (counts[3] + 1)
+      ]);
       this.cash += this.checkSumUp(this.singleThreeList) * (counts[3] + 1);
     }
     if (counts[4]) {
+      this.winList.push([
+        'Single 4', this.checkSumUp(this.singleFourList) * (counts[4] + 1)
+      ]);
       this.cash += this.checkSumUp(this.singleFourList) * (counts[4] + 1);
     }
     if (counts[5]) {
+      this.winList.push([
+        'Single 5', this.checkSumUp(this.singleFiveList) * (counts[5] + 1)
+      ]);
       this.cash += this.checkSumUp(this.singleFiveList) * (counts[5] + 1);
     }
     if (counts[6]) {
+      this.winList.push([
+        'Single 6', this.checkSumUp(this.singleSixList) * (counts[6] + 1)
+      ]);
       this.cash += this.checkSumUp(this.singleSixList) * (counts[6] + 1);
     }
   }

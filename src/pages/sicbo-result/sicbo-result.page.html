@@ -1,12 +1,22 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>Result</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content class="ion-padding">
-  <ion-img class="column double" [src]="dice1"></ion-img>
-  <ion-img class="column double" [src]="dice2"></ion-img>
-  <ion-img class="column double" [src]="dice3"></ion-img>
-  <!-- <h1>You win!</h1> -->
+
+  <ion-grid>
+    <ion-row>
+      <ion-img class="column double" [src]="dice1"></ion-img>
+      <ion-img class="column double" [src]="dice2"></ion-img>
+      <ion-img class="column double" [src]="dice3"></ion-img>
+    </ion-row>
+    <ion-row>
+      <ion-text color="warning" style="width: 100%; text-align: center;">
+        <h1 style="font-size: 40px;">You win $ {{ winCash }} !</h1>
+      </ion-text>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>

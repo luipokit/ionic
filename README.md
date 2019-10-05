@@ -48,4 +48,8 @@ Debug specs in the browser in the same way that you debug an application.
 
 ## Modal
 
-ref. https://forum.ionicframework.com/t/solved-ionic-4-need-to-know-how-to-work-the-modal-controller/136414/4
+https://forum.ionicframework.com/t/solved-ionic-4-need-to-know-how-to-work-the-modal-controller/136414/4
+
+## Array
+
+https://stackoverflow.com/questions/8073673/how-can-i-add-new-array-elements-at-the-beginning-of-an-array-in-javascript

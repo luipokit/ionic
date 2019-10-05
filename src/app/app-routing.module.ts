@@ -62,6 +62,10 @@ const routes: Routes = [{
   {
     path: 'sicbo-result',
     loadChildren: '../pages/sicbo-result/sicbo-result.module#SicboResultPageModule'
+  },
+  {
+    path: 'sicbo-result-storage',
+    loadChildren: '../pages/sicbo-result-storage/sicbo-result-storage.module#SicboResultStoragePageModule'
   }
 ];
 
