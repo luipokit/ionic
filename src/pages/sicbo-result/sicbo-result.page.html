@@ -13,8 +13,12 @@
       <ion-img class="column double" [src]="dice3"></ion-img>
     </ion-row>
     <ion-row>
-      <ion-text color="warning" style="width: 100%; text-align: center;">
-        <h1 style="font-size: 40px;">You win $ {{ winCash }} !</h1>
+      <ion-text *ngIf="winCash > 0" color="success" style="width: 100%; text-align: center;">
+        <h1 style="font-size: 40px;"><strong>YOU WIN</strong></h1>
+        <h1 style="font-size: 40px;"><strong>$ {{ winCash }} !</strong></h1>
+      </ion-text>
+      <ion-text *ngIf="winCash == 0" color="danger" style="width: 100%; text-align: center;">
+        <h1 style="font-size: 40px;"><strong>NO WIN!</strong></h1>
       </ion-text>
     </ion-row>
   </ion-grid>

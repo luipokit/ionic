@@ -45,6 +45,9 @@ import {
 import {
   HTTP
 } from '@ionic-native/http/ngx';
+import {
+  ScreenOrientation
+} from '@ionic-native/screen-orientation/ngx';
 
 import {
   SicboPageModule
@@ -86,6 +89,7 @@ import {
     },
     HTTP,
     Keyboard,
+    ScreenOrientation,
   ],
   bootstrap: [AppComponent],
 })

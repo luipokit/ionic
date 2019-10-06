@@ -3,9 +3,9 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Sicbo</ion-title>
+    <ion-title slot="start">Sicbo</ion-title>
     <div slot='end'>
-      <ion-button block class="ion-margin" size="small" color="dark" slot='end'>
+      <ion-button block size="small" color="dark" slot='end'>
         Timer: {{timer}}
       </ion-button>
     </div>
@@ -15,7 +15,7 @@
       </ion-button>
     </div> -->
     <div slot='end'>
-      <ion-button block [disabled]="true" class="ion-margin" size="small" color="dark" slot='end'>
+      <ion-button block [disabled]="true" size="small" color="dark" slot='end'>
         CASH: ${{cash}}
       </ion-button>
     </div>
@@ -25,7 +25,7 @@
       </ion-button>
     </div> -->
     <div slot='end'>
-      <ion-button class="ion-margin" size="small" color="secondary" (click)="presentSicboResultStorageModal()" slot='end'>
+      <ion-button size="small" color="secondary" (click)="presentSicboResultStorageModal()" slot='end'>
         History
       </ion-button>
     </div>

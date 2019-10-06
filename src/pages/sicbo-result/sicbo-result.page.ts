@@ -42,12 +42,6 @@ export class SicboResultPage implements OnInit {
 
   ngOnInit() {
     // componentProps can also be accessed at construction time using NavParams
-    // console.log(
-    //   this.navParams.get('first'),
-    //   this.navParams.get('second'),
-    //   this.navParams.get('third')
-    // );
-
     if (this.navParams.get('first')) {
       this.dice1 = this.dice_array[this.navParams.get('first') - 1].src;
     }

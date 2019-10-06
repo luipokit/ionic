@@ -3,14 +3,20 @@ import {
   OnInit
 } from '@angular/core';
 import {
-  ModalController
+  ModalController,
+  Platform
 } from '@ionic/angular';
+import {
+  ScreenOrientation
+} from '@ionic-native/screen-orientation/ngx';
 import {
   SicboResultPage
 } from '../sicbo-result/sicbo-result.page';
 import {
   SicboResultStoragePage
 } from '../sicbo-result-storage/sicbo-result-storage.page';
+
+
 
 @Component({
   selector: 'app-sicbo',
@@ -19,11 +25,9 @@ import {
 })
 export class SicboPage implements OnInit {
 
-  X = 0;
-  Y = 0;
-  Z = 0;
-
   cash = 200000;
+
+  terminate = false;
 
   sicboList = [];
   storeSicboList = [];
@@ -110,15 +114,28 @@ export class SicboPage implements OnInit {
   public currentModal = null;
 
   constructor(
-    public modalController: ModalController
+    public modalController: ModalController,
+    public screenOrientation: ScreenOrientation,
+    public platform: Platform,
   ) {}
 
   public ID;
   public timer = 10;
 
   ngOnInit() {
+    if (this.platform.is('cordova')) {
+      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+    }
     this.click100();
     this.play();
+  }
+
+  ionViewWillLeave() {
+    if (this.platform.is('cordova')) {
+      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      this.screenOrientation.unlock();
+    }
+    this.terminate = true;
   }
 
   play() {
@@ -170,17 +187,23 @@ export class SicboPage implements OnInit {
         return delay(1000);
       })
       .then(() => {
-        this.throwDice();
-        recursion2();
+        if (this.terminate !== true) {
+          this.throwDice();
+          recursion2();
+        }
       });
 
     const recursion2 = () => delay(0)
       .then(() => {
-        return delay(2000);
+        return delay(3000);
       }).then(() => {
         this.dismissModal();
         this.timer += 10;
-        recursion();
+
+        if (this.terminate !== true) {
+          recursion();
+        }
+
       });
 
     recursion();
@@ -193,7 +216,7 @@ export class SicboPage implements OnInit {
         'first': this.sicboList[0],
         'second': this.sicboList[1],
         'third': this.sicboList[2],
-        'winCash' : this.checkSumUpWin(this.winList)
+        'winCash': this.checkSumUpWin(this.winList)
       },
       cssClass: 'my-custom-modal-css',
     });
@@ -205,7 +228,7 @@ export class SicboPage implements OnInit {
       component: SicboResultStoragePage,
       componentProps: {
         'storeSicboList': this.storeSicboList,
-        'modal' : this.currentModal
+        'modal': this.currentModal
       },
       cssClass: 'sicbo-result-storage-modal-css',
     });
@@ -231,7 +254,6 @@ export class SicboPage implements OnInit {
     this.checkWin(this.sicboList);
 
     // Show result
-    // alert(this.sicboList);
     this.presentModal();
 
     console.table(this.winList);
@@ -244,7 +266,7 @@ export class SicboPage implements OnInit {
     if (this.storeSicboList.length > 10) {
       this.storeSicboList.pop();
     }
-    console.table(this.storeSicboList);
+    // console.table(this.storeSicboList);
   }
 
   checkDouble(sicboList) {
@@ -484,7 +506,7 @@ export class SicboPage implements OnInit {
     sicboList.forEach(function (x) {
       counts[x] = (counts[x] || 0) + 1;
     });
-    console.table(counts);
+    // console.table(counts);
 
     if (counts[1]) {
       this.winList.push([
@@ -673,8 +695,6 @@ export class SicboPage implements OnInit {
     if (remain >= 0) {
       this.cash = remain;
       this.smallList.push(bet);
-    } else {
-      alert('You dont have enough money');
     }
     console.log(this.smallList);
   }
@@ -687,7 +707,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.bigList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.bigList);
   }
@@ -700,7 +720,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.tripleList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.tripleList);
   }
@@ -713,7 +733,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.tripleSixList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.tripleSixList);
   }
@@ -726,7 +746,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.tripleFiveList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.tripleFiveList);
   }
@@ -739,7 +759,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.tripleFourList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.tripleFourList);
   }
@@ -752,7 +772,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.tripleThreeList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.tripleThreeList);
   }
@@ -765,7 +785,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.tripleTwoList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.tripleTwoList);
   }
@@ -778,7 +798,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.tripleOneList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.tripleOneList);
   }
@@ -791,7 +811,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.doubleSixList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.doubleSixList);
   }
@@ -804,7 +824,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.doubleFiveList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.doubleFiveList);
   }
@@ -817,7 +837,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.doubleFourList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.doubleFourList);
   }
@@ -830,7 +850,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.doubleThreeList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.doubleThreeList);
   }
@@ -843,7 +863,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.doubleTwoList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.doubleTwoList);
   }
@@ -856,7 +876,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.doubleOneList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.doubleOneList);
   }
@@ -869,7 +889,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.list_17.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.list_17);
   }
@@ -882,7 +902,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.list_16.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.list_16);
   }
@@ -895,7 +915,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.list_15.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.list_15);
   }
@@ -908,7 +928,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.list_14.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.list_14);
   }
@@ -921,7 +941,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.list_13.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.list_13);
   }
@@ -934,7 +954,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.list_12.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.list_12);
   }
@@ -947,7 +967,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.list_11.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.list_11);
   }
@@ -960,7 +980,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.list_10.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.list_10);
   }
@@ -973,7 +993,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.list_9.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.list_9);
   }
@@ -986,7 +1006,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.list_8.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.list_8);
   }
@@ -999,7 +1019,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.list_7.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.list_7);
   }
@@ -1012,7 +1032,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.list_6.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.list_6);
   }
@@ -1025,7 +1045,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.list_5.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.list_5);
   }
@@ -1038,7 +1058,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.list_4.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.list_4);
   }
@@ -1051,7 +1071,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.singleSixList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.singleSixList);
   }
@@ -1063,7 +1083,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.singleFiveList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.singleFiveList);
   }
@@ -1075,7 +1095,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.singleFourList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.singleFourList);
   }
@@ -1087,7 +1107,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.singleThreeList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.singleThreeList);
   }
@@ -1099,7 +1119,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.singleTwoList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.singleTwoList);
   }
@@ -1111,7 +1131,7 @@ export class SicboPage implements OnInit {
       this.cash = remain;
       this.singleOneList.push(bet);
     } else {
-      alert('You dont have enough money');
+
     }
     console.log(this.singleOneList);
   }

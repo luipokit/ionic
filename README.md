@@ -53,3 +53,7 @@ https://forum.ionicframework.com/t/solved-ionic-4-need-to-know-how-to-work-the-m
 ## Array
 
 https://stackoverflow.com/questions/8073673/how-can-i-add-new-array-elements-at-the-beginning-of-an-array-in-javascript
+
+## ionic serve on Chrome
+
+ionic serve --browser "google chrome"
